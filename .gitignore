@@ -31,3 +31,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 Assets/Scripts/Commodities.meta
+
+/.vscode
