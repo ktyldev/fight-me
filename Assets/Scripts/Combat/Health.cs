@@ -10,25 +10,28 @@ public class Health : MonoBehaviour {
 
     public float Current { get { return (float)_current / max; } }
     public UnityEvent OnDamageTaken { get; private set; }
+    public UnityEvent OnDeath { get; private set; }
 
     void Awake() {
-        OnDamageTaken = new UnityEvent();    
+        OnDamageTaken = new UnityEvent();
+        OnDeath = new UnityEvent();
     }
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         _current = max;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update() {
+
+    }
 
     public void TakeDamage(int amount) {
         _current -= amount;
         OnDamageTaken.Invoke();
         if (Current <= 0) {
+            OnDeath.Invoke();
             Destroy(gameObject);
         }
     }
