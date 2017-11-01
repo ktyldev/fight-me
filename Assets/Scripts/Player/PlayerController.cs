@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Health))]
 public class PlayerController : MonoBehaviour {
 
     public float speed;
@@ -11,8 +13,12 @@ public class PlayerController : MonoBehaviour {
 
     private CharacterController _charController;
     private Vector3 _movement = Vector3.zero;
+    private Health _health;
 
     void Start() {
+        _health = GetComponent<Health>();
+        _health.OnDeath.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
+
         _charController = GetComponent<CharacterController>();
     }
 
