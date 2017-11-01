@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Drink : MonoBehaviour {
 
+    public int bacIncrease;
+
     // Use this for initialization
     void Start() {
 
@@ -19,6 +21,8 @@ public class Drink : MonoBehaviour {
         if (player == null)
             return;
 
+        var playerBac = player.GetComponent<BloodAlcohol>();
+        playerBac.Increase(bacIncrease);
         Destroy(gameObject);
     }
 }
