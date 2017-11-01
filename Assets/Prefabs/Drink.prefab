@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2a972c23e194f4daea3581cced1fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bacIncrease: 5
+  bacIncrease: 20
 --- !u!135 &135170068012738718
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -26,7 +26,10 @@ public class BloodAlcohol : MonoBehaviour {
 	}
 
     public void Increase(int amount) {
-        _current += amount;
+        if (_current == maximum)
+            return;
+        
+        _current = Mathf.Clamp(_current + amount, 0, maximum);
         OnDrink.Invoke();
     }
 }
