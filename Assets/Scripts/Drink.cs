@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickup : MonoBehaviour {
+public class Drink : MonoBehaviour {
 
     // Use this for initialization
     void Start() {

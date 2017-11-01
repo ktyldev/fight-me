@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 114732041511764300}
   - component: {fileID: 135525086161550418}
   m_Layer: 0
-  m_Name: Pickup
+  m_Name: Drink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
