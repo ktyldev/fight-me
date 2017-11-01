@@ -9,40 +9,29 @@ public class PlayerController : MonoBehaviour {
     public float punchReach;
     public LayerMask groundLayer;
 
-    private Rigidbody _rigidBody;
-    private bool _jump;
+    private CharacterController _charController;
+    private Vector3 _movement = Vector3.zero;
 
-    // Use this for initialization
     void Start() {
-        _rigidBody = GetComponent<Rigidbody>();
+        _charController = GetComponent<CharacterController>();
     }
 
     private void Update() {
-        if (!_jump) {
-            _jump = Input.GetButtonDown("Jump");
+        if (_charController.isGrounded) {
+            _movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            _movement *= speed;
+
+            if (Input.GetButtonDown("Jump")) {
+                _movement.y = jumpStrength;
+            }
         }
+
+        _movement.y += Physics.gravity.y * Time.deltaTime;
+        _charController.Move(_movement * speed * Time.deltaTime);
 
         if (Input.GetButtonDown("Fire")) {
             Punch();
         }
-    }
-
-    // Update is called once per frame
-    void FixedUpdate() {
-        var movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        _rigidBody.AddForce(movement * speed);
-
-        if (_jump) {
-            if (IsGrounded()) {
-                _rigidBody.AddForce(Vector3.up * jumpStrength, ForceMode.Impulse);
-            }
-
-            _jump = false;
-        }
-    }
-
-    private bool IsGrounded() {
-        return Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f, groundLayer.value);
     }
 
     private void Punch() {
