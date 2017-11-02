@@ -29,12 +29,12 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
         if (_charController.isGrounded) {
             var moveDir = Vector3.Lerp(
-                new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")), 
+                new Vector3(Input.GetAxis(GameInput.Horizontal), 0, Input.GetAxis(GameInput.Vertical)), 
                 _movement.normalized, 
                 _bac.Current * drunkMotion);
             _movement = moveDir * speed;
 
-            if (Input.GetButtonDown("Jump")) {
+            if (Input.GetButtonDown(GameInput.Jump)) {
                 _movement.y = jumpStrength;
             }
         }
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour {
         _movement.y += Physics.gravity.y * Time.deltaTime;
         _charController.Move(_movement * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Fire")) {
+        if (Input.GetButtonDown(GameInput.Fire)) {
             Punch();
         }
     }

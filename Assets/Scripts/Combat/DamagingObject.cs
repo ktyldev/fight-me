@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class DamagingObject : MonoBehaviour {
 
+    [SerializeField]
+    private int _returnDamage = 1;
+
+    [SerializeField]
+    [Range(0.05f, 1f)]
+    private float _damageChance;
+
     private Health _ownHealth;
     private Health _playerHealth;
 
 	// Use this for initialization
 	void Start () {
-        _playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+        _playerHealth = GameObject.FindGameObjectWithTag(GameTags.Player).GetComponent<Health>();
         _ownHealth = GetComponent<Health>();
         _ownHealth.OnDamageTaken.AddListener(() => {
-            if (Random.value > 0.5) {
-                _playerHealth.TakeDamage(1);
+            if (Random.Range(0f, 1f) <= _damageChance) {
+                _playerHealth.TakeDamage(_returnDamage);
             }
         });
 	}
