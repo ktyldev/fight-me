@@ -9,11 +9,11 @@ public class Health : MonoBehaviour {
     private int _current;
 
     public float Current { get { return (float)_current / max; } }
-    public UnityEvent OnDamageTaken { get; private set; }
+    public UnityEvent OnChange { get; private set; }
     public UnityEvent OnDeath { get; private set; }
 
     void Awake() {
-        OnDamageTaken = new UnityEvent();
+        OnChange = new UnityEvent();
         OnDeath = new UnityEvent();
     }
 
@@ -29,10 +29,15 @@ public class Health : MonoBehaviour {
 
     public void TakeDamage(int amount) {
         _current -= amount;
-        OnDamageTaken.Invoke();
+        OnChange.Invoke();
         if (Current <= 0) {
             OnDeath.Invoke();
             Destroy(gameObject);
         }
+    }
+
+    public void Restore(int amount) {
+        _current = Mathf.Clamp(_current + amount, _current, max);
+        OnChange.Invoke();
     }
 }

@@ -18,7 +18,7 @@ public class DamagingObject : MonoBehaviour {
 	void Start () {
         _playerHealth = GameObject.FindGameObjectWithTag(GameTags.Player).GetComponent<Health>();
         _ownHealth = GetComponent<Health>();
-        _ownHealth.OnDamageTaken.AddListener(() => {
+        _ownHealth.OnChange.AddListener(() => {
             if (Random.Range(0f, 1f) <= _damageChance) {
                 _playerHealth.TakeDamage(_returnDamage);
             }

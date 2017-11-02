@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Drink : MonoBehaviour {
 
+    public int healthIncrease;
     public int bacIncrease;
 
     // Use this for initialization
@@ -20,9 +21,9 @@ public class Drink : MonoBehaviour {
         var player = other.gameObject.GetComponent<PlayerController>();
         if (player == null)
             return;
-
-        var playerBac = player.GetComponent<BloodAlcohol>();
-        playerBac.Increase(bacIncrease);
+        
+        player.GetComponent<Health>().Restore(healthIncrease);
+        player.GetComponent<BloodAlcohol>().Increase(bacIncrease);
         Destroy(gameObject);
     }
 }

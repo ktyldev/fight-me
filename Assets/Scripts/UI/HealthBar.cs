@@ -15,7 +15,7 @@ public class HealthBar : MonoBehaviour {
         _image = GetComponent<Image>();
         _health = healthObject.GetComponent<Health>();
 
-        _health.OnDamageTaken.AddListener(() => _image.fillAmount = _health.Current);
+        _health.OnChange.AddListener(() => _image.fillAmount = _health.Current);
 	}
 	
 	// Update is called once per frame
