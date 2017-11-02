@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114430492820935294}
   - component: {fileID: 114768837322732794}
   - component: {fileID: 114655555238960344}
+  - component: {fileID: 114548838824332646}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -57,9 +58,8 @@ GameObject:
   - component: {fileID: 224591698313516520}
   - component: {fileID: 222066783139913446}
   - component: {fileID: 114443706452154100}
-  - component: {fileID: 114863020224007562}
   m_Layer: 0
-  m_Name: Health
+  m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,6 +140,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 1
+--- !u!114 &114548838824332646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048212106096752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8108272a2f4316f498da2067392f0b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1893070967152934}
 --- !u!114 &114655555238960344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,18 +179,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114863020224007562
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1893070967152934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8108272a2f4316f498da2067392f0b87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthObject: {fileID: 0}
 --- !u!222 &222066783139913446
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -217,7 +217,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1048212106096752}
-  m_LocalRotation: {x: -0, y: -0.3165412, z: -0, w: 0.9485788}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.03, y: 0.03, z: 1}
   m_Children:

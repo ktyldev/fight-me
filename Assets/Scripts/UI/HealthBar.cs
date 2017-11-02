@@ -5,21 +5,24 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour {
 
+    public GameObject image;
     public GameObject healthObject;
 
     private Image _image;
     private Health _health;
+    
+    void Start() {
+        _image = image.GetComponent<Image>();
 
-	// Use this for initialization
-	void Start () {
-        _image = GetComponent<Image>();
-        _health = healthObject.GetComponent<Health>();
+        if (healthObject != null) {
+            _health = healthObject.GetComponent<Health>();
+        } else {
+            _health = GetComponentInParent<Health>();
+        }
 
+        if (_health == null)
+            throw new System.Exception();
+        
         _health.OnChange.AddListener(() => _image.fillAmount = _health.Current);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
 }
