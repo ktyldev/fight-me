@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour {
-    
+
     private string _nowPlaying;
-    
+
     // Use this for initialization
-    void Start () {
+    void Start() {
         // No music to start with
         _nowPlaying = null;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update() {
+
+    }
 
     public void PlayTheme(string newTheme) {
         StartCoroutine(FadeAudio(newTheme));
     }
 
     private IEnumerator FadeAudio(string newAudio) {
+        if (newAudio == _nowPlaying)
+            yield break;
+
         if (!string.IsNullOrEmpty(_nowPlaying)) {
             print("stopping audio: " + _nowPlaying);
         }
