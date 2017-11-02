@@ -8,6 +8,17 @@ public class CameraController : MonoBehaviour {
     public float lerpT;
     public float distance;
     public float angle;
+    public Material postFXMaterial;
+    public Shader[] drunkShaders;
+    public BloodAlcohol playerBAC;
+
+    void OnRenderImage (RenderTexture src, RenderTexture dest) {
+        Graphics.Blit(src, dest, postFXMaterial);
+    }
+
+    void Update() {
+        postFXMaterial.shader = drunkShaders[(int)(Mathf.Floor(playerBAC.Current * 10))];
+    }
 
     void LateUpdate() {
         if (trackedObject == null)
