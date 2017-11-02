@@ -11,8 +11,7 @@ public class MouseLook : MonoBehaviour {
         _plane = new Plane(Vector3.up, Vector3.zero);
     }
 	
-	// Update is called once per frame
-	void Update () {
+    public void LookAtMouse() {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         float distance;

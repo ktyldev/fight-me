@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     private CharacterController _charController;
     private Health _health;
     private BloodAlcohol _bac;
-    
+
     private Vector3 _movement = Vector3.zero;
 
     void Start() {
@@ -28,12 +28,15 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         if (_charController.isGrounded) {
-            var moveDir = Vector3.Lerp(
-                new Vector3(Input.GetAxis(GameInput.Horizontal), 0, Input.GetAxis(GameInput.Vertical)), 
-                _movement.normalized, 
-                _bac.Current * drunkMotion);
+            var input = new Vector3(Input.GetAxis(GameInput.Horizontal), 0, Input.GetAxis(GameInput.Vertical));
+            var moveDir = Vector3.Lerp(input, _movement.normalized, _bac.Current * drunkMotion);
             _movement = moveDir * speed;
 
+            if (_movement != Vector3.zero) {
+                // Look in the direction of movement, or direction last moved in if standing still
+                transform.LookAt(transform.position + (_movement.magnitude > 1 ? _movement : transform.forward));
+            }
+            
             if (Input.GetButtonDown(GameInput.Jump)) {
                 _movement.y = jumpStrength;
             }
@@ -48,6 +51,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Punch() {
+        GetComponent<MouseLook>().LookAtMouse();
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, punchReach)) {
             var hitObject = hit.collider.gameObject;
