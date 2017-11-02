@@ -6,6 +6,8 @@ public class Drink : MonoBehaviour {
 
     public int healthIncrease;
     public int bacIncrease;
+    // Temporary until we have actual music to use
+    public string audioName;
 
     // Use this for initialization
     void Start() {
@@ -23,7 +25,14 @@ public class Drink : MonoBehaviour {
             return;
         
         player.GetComponent<Health>().Restore(healthIncrease);
-        player.GetComponent<BloodAlcohol>().Increase(bacIncrease);
+        player.GetComponent<BloodAlcohol>().Drink(this);
+        // Play drink animation
+
+        // audioName will be replaced with actual audio
+        GameObject.FindGameObjectWithTag(GameTags.Music)
+            .GetComponent<MusicManager>()
+            .PlayTheme(audioName);
+
         Destroy(gameObject);
     }
 }

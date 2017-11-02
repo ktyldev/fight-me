@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthIncrease: 1
   bacIncrease: 5
+  audioName: tequila song
 --- !u!135 &135785325970535430
 SphereCollider:
   m_ObjectHideFlags: 1

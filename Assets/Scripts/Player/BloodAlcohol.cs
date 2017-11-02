@@ -24,12 +24,12 @@ public class BloodAlcohol : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    public void Increase(int amount) {
+    
+    public void Drink(Drink drink) {
         if (_current == maximum)
             return;
         
-        _current = Mathf.Clamp(_current + amount, 0, maximum);
+        _current = Mathf.Clamp(_current + drink.bacIncrease, 0, maximum);
         OnDrink.Invoke();
     }
 }
