@@ -4,35 +4,46 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour {
 
-    private string _nowPlaying;
+    public float fadeSpeed;
 
-    // Use this for initialization
+    private GameObject _nowPlaying;
+    
     void Start() {
         // No music to start with
         _nowPlaying = null;
     }
-
-    // Update is called once per frame
-    void Update() {
-
+    
+    public void PlayTheme(GameObject music) {
+        if (_nowPlaying == null) {
+            _nowPlaying = Instantiate(music, transform);
+            return;
+        }
+        
+        if (SongsAreSame(_nowPlaying, music)) 
+            return;
+        
+        StartCoroutine(FadeAudio(music));
     }
 
-    public void PlayTheme(string newTheme) {
-        StartCoroutine(FadeAudio(newTheme));
+    private bool SongsAreSame(GameObject song1, GameObject song2 /*Woo hoo!*/) {
+        return song1.GetComponent<Song>().id == song2.GetComponent<Song>().id;
     }
 
-    private IEnumerator FadeAudio(string newAudio) {
-        if (newAudio == _nowPlaying)
-            yield break;
+    private IEnumerator FadeAudio(GameObject newSong) {
+        var oldAudio = _nowPlaying.GetComponent<AudioSource>();
+        var newAudio = Instantiate(newSong, transform).GetComponent<AudioSource>();
+        newAudio.volume = 0;
+        newAudio.Play();
 
-        if (!string.IsNullOrEmpty(_nowPlaying)) {
-            print("stopping audio: " + _nowPlaying);
+        while (newAudio.volume < 1) {
+            oldAudio.volume -= fadeSpeed;
+            newAudio.volume += fadeSpeed;
+            yield return new WaitForSeconds(0.001f);
         }
 
-        // Fade out old audio while the player drinks
-        yield return new WaitForSeconds(1);
-
-        print("starting audio: " + newAudio);
-        _nowPlaying = newAudio;
+        oldAudio.Stop();
+        var oldAudioObject = _nowPlaying;
+        Destroy(oldAudioObject);
+        _nowPlaying = newAudio.gameObject;
     }
 }

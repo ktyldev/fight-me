@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthIncrease: 1
   bacIncrease: 5
-  audioName: tequila song
+  music: {fileID: 1192864008796664, guid: ac3cca3a76ea1fe4aa1d91eb80bb5843, type: 2}
 --- !u!135 &135785325970535430
 SphereCollider:
   m_ObjectHideFlags: 1

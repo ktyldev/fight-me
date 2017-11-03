@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4478552360045664}
   - component: {fileID: 82868898304618974}
+  - component: {fileID: 114470692152579658}
   m_Layer: 0
   m_Name: Cocktail
   m_TagString: Untagged
@@ -120,3 +121,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114470692152579658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1192864008796664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65daf77937c24524dba9b25df7cc9f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  title: Cocktail

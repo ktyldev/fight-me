@@ -7,7 +7,7 @@ public class Drink : MonoBehaviour {
     public int healthIncrease;
     public int bacIncrease;
     // Temporary until we have actual music to use
-    public string audioName;
+    public GameObject music;
 
     // Use this for initialization
     void Start() {
@@ -31,7 +31,7 @@ public class Drink : MonoBehaviour {
         // audioName will be replaced with actual audio
         GameObject.FindGameObjectWithTag(GameTags.Music)
             .GetComponent<MusicManager>()
-            .PlayTheme(audioName);
+            .PlayTheme(music);
 
         Destroy(gameObject);
     }
