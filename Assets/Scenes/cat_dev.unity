@@ -405,6 +405,7 @@ MonoBehaviour:
   speed: 3.5
   drunkMotion: 0.8
   fallAnimTime: 0.5
+  getUpTime: 1.5
 --- !u!143 &646097147
 CharacterController:
   m_ObjectHideFlags: 0
