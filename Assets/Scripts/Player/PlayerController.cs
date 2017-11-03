@@ -4,25 +4,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Health))]
+[RequireComponent(typeof(PlayerCombat))]
 public class PlayerController : MonoBehaviour {
 
     public float speed;
     public float jumpStrength;
-    public float punchReach;
     public float drunkMotion;
-    public LayerMask groundLayer;
 
     private CharacterController _charController;
     private Health _health;
     private BloodAlcohol _bac;
-
+    private PlayerCombat _combat;
     private Vector3 _movement = Vector3.zero;
 
     void Start() {
         _health = GetComponent<Health>();
         _bac = GetComponent<BloodAlcohol>();
         _health.OnDeath.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
-
+        _combat = GetComponent<PlayerCombat>();
         _charController = GetComponent<CharacterController>();
     }
 
@@ -46,21 +45,7 @@ public class PlayerController : MonoBehaviour {
         _charController.Move(_movement * speed * Time.deltaTime);
 
         if (Input.GetButtonDown(GameInput.Fire)) {
-            Punch();
-        }
-    }
-
-    private void Punch() {
-        GetComponent<MouseLook>().LookAtMouse();
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, punchReach)) {
-            var hitObject = hit.collider.gameObject;
-            var opponentHealth = hitObject.GetComponent<Health>();
-            if (opponentHealth == null)
-                return;
-
-            opponentHealth.TakeDamage(1);
+            _combat.Attack();
         }
     }
 }
