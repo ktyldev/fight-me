@@ -471,7 +471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3.5
   drunkMotion: 0.8
-  fallAnimTime: 0.5
+  fallAnimTime: 0.4
   getUpTime: 1.5
 --- !u!143 &646097147
 CharacterController:
@@ -539,6 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maximum: 100
+  drinkTime: 2.317
 --- !u!114 &646097152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1327,7 +1328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedObject: {fileID: 646097149}
   lerpT: 0.2
-  distance: 10
+  distance: 15
   angle: 60
   postFXMaterial: {fileID: 2100000, guid: fc40016a15ee3c7408f3af8582a06cff, type: 2}
   drunkShaders:
