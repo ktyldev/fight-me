@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
     private Health _health;
     private BloodAlcohol _bac;
     private PlayerCombat _combat;
+    private Animator _animator;
     private Vector3 _movement = Vector3.zero;
     private float _fallTimer;
     
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour {
         _health.OnDeath.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
         _combat = GetComponent<PlayerCombat>();
         _charController = GetComponent<CharacterController>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Update() {
@@ -46,23 +48,25 @@ public class PlayerController : MonoBehaviour {
         } else {
             _fallTimer += Time.deltaTime;
         }
-
+    
         Move();
     }
-
+    
     private void HandleInput() {
         var input = new Vector3(Input.GetAxis(GameInput.Horizontal), 0, Input.GetAxis(GameInput.Vertical));
         var moveDir = Vector3.Lerp(input, _movement.normalized, _bac.Current * drunkMotion);
         _movement = moveDir * speed;
 
-        if (_movement != Vector3.zero) {
+        if (_movement != Vector3.zero) {   
             // Look in the direction of movement, or direction last moved in if standing still
             transform.LookAt(transform.position + (_movement.magnitude > 1 ? _movement : transform.forward));
         }
     }
 
     private void Move() {
+        _animator.SetBool("moving", _charController.velocity != Vector3.zero);
         _movement.y += Physics.gravity.y * Time.deltaTime;
+        
         if (!_fallenOver) {
             _charController.Move(_movement * speed * Time.deltaTime);
         }
