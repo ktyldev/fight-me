@@ -11,10 +11,17 @@ public class PlayerCombat : MonoBehaviour {
     public float timeout;
     public float[] minTimings;
 
+    public bool IsPunching { get { return _chainIndex != 0; } }
+
     private int _chainIndex;
     private float _lastAttackTime;
+    private Animator _animator;
 
-	void Update () {
+    void Start() {
+        _animator = GetComponentInChildren<Animator>();        
+    }
+
+    void Update () {
         _lastAttackTime = Mathf.Clamp(_lastAttackTime - Time.deltaTime, 0, 99999);
         if (Time.time - _lastAttackTime > timeout) {
             _chainIndex = 0;
@@ -27,7 +34,10 @@ public class PlayerCombat : MonoBehaviour {
             return;
         }
 
-        Punch();
+        GetComponent<MouseLook>().LookAtMouse();
+        _animator.SetTrigger("punch");
+
+        StartCoroutine(ThrowPunch(minTimings[_chainIndex]));
         // Punch # _chainIndex + 1 of combo
         _lastAttackTime = Time.time;
         _chainIndex++;
@@ -36,9 +46,8 @@ public class PlayerCombat : MonoBehaviour {
             _chainIndex = 0;
         }
     }
-
-    private void Punch() {
-        GetComponent<MouseLook>().LookAtMouse();
+    
+    private void DoDamage() {
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, punchReach)) {
@@ -49,5 +58,10 @@ public class PlayerCombat : MonoBehaviour {
 
             opponentHealth.TakeDamage(damage);
         }
+    }
+
+    private IEnumerator ThrowPunch(float delay) {
+        yield return new WaitForSeconds(delay);
+        DoDamage();
     }
 }

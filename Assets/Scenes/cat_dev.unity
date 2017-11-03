@@ -148,6 +148,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114696673952951950, guid: 4840187394d010f4ba8d5b5c2b2295f4,
+        type: 2}
+      propertyPath: max
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4840187394d010f4ba8d5b5c2b2295f4, type: 2}
   m_IsPrefabParent: 0
@@ -549,9 +554,9 @@ MonoBehaviour:
   damage: 1
   timeout: 1.5
   minTimings:
-  - 0.5
-  - 0.5
-  - 1
+  - 0.3
+  - 0.3
+  - 0.4
 --- !u!1 &756650994
 GameObject:
   m_ObjectHideFlags: 0

@@ -48,8 +48,10 @@ public class PlayerController : MonoBehaviour {
         } else {
             _fallTimer += Time.deltaTime;
         }
-    
-        Move();
+
+        if (!_combat.IsPunching) {
+            Move();
+        }
     }
     
     private void HandleInput() {
