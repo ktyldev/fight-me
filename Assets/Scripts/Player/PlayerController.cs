@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour {
 
     public float speed;
-    public float jumpStrength;
     public float drunkMotion;
 
     private CharacterController _charController;
@@ -26,6 +25,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
+        if (Input.GetButtonDown(GameInput.Fire)) {
+            _combat.Attack();
+        }
+
         if (_charController.isGrounded) {
             var input = new Vector3(Input.GetAxis(GameInput.Horizontal), 0, Input.GetAxis(GameInput.Vertical));
             var moveDir = Vector3.Lerp(input, _movement.normalized, _bac.Current * drunkMotion);
@@ -35,17 +38,9 @@ public class PlayerController : MonoBehaviour {
                 // Look in the direction of movement, or direction last moved in if standing still
                 transform.LookAt(transform.position + (_movement.magnitude > 1 ? _movement : transform.forward));
             }
-            
-            if (Input.GetButtonDown(GameInput.Jump)) {
-                _movement.y = jumpStrength;
-            }
         }
 
         _movement.y += Physics.gravity.y * Time.deltaTime;
         _charController.Move(_movement * speed * Time.deltaTime);
-
-        if (Input.GetButtonDown(GameInput.Fire)) {
-            _combat.Attack();
-        }
     }
 }
