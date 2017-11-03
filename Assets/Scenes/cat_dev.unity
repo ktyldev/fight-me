@@ -403,8 +403,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3.5
-  jumpStrength: 4
   drunkMotion: 0.8
+  fallAnimTime: 0.5
 --- !u!143 &646097147
 CharacterController:
   m_ObjectHideFlags: 0
