@@ -13,6 +13,8 @@ public class HealthBar : MonoBehaviour {
     
     void Start() {
         _image = image.GetComponent<Image>();
+        
+        _image.transform.parent.gameObject.SetActive(false);
 
         if (healthObject != null) {
             _health = healthObject.GetComponent<Health>();
@@ -23,6 +25,11 @@ public class HealthBar : MonoBehaviour {
         if (_health == null)
             throw new System.Exception();
         
-        _health.OnChange.AddListener(() => _image.fillAmount = _health.Current);
+        _health.OnChange.AddListener(() => {
+            if (!_image.IsActive()) {
+                _image.transform.parent.gameObject.SetActive(true);
+            }
+            _image.fillAmount = _health.Current;
+        });
     }
 }
