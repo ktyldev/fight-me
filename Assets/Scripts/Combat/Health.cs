@@ -6,8 +6,9 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour {
 
     public int max;
+    public float delayDestroy;
     private int _current;
-
+    
     public float Current { get { return (float)_current / max; } }
     public UnityEvent OnChange { get; private set; }
     public UnityEvent OnDeath { get; private set; }
@@ -32,7 +33,7 @@ public class Health : MonoBehaviour {
         OnChange.Invoke();
         if (Current <= 0) {
             OnDeath.Invoke();
-            Destroy(gameObject);
+            Destroy(gameObject, delayDestroy);
         }
     }
 

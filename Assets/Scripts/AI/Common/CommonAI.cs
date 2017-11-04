@@ -23,6 +23,7 @@ public class CommonAI : MonoBehaviour {
     private StateBehaviour _currentState;
     private bool _cachedPlayerInSight;
     private Health _player;
+    private bool _playerDead;
     private bool _isAttacking;
 
     private enum StateBehaviour {
@@ -36,7 +37,8 @@ public class CommonAI : MonoBehaviour {
         GetComponent<Health>().OnDeath.AddListener(() => PerformDeathAnimation());
 
         // Might need to make manager to pass reference to all ai along with other stuff (pathing, game state, etc..)
-        _player = GameObject.FindGameObjectWithTag(GameTags.Player).GetComponent<Health>(); 
+        _player = GameObject.FindGameObjectWithTag(GameTags.Player).GetComponent<Health>();
+        _player.OnDeath.AddListener(() => _playerDead = true);
     }
 
     private void PerformDeathAnimation() {
@@ -45,9 +47,23 @@ public class CommonAI : MonoBehaviour {
 
     private IEnumerator AttackCoroutine()
     {
-        _isAttacking = true;
-        yield return new WaitForSeconds(3f);
-        _isAttacking = false;
+        while (WithinAttackRange()) 
+        {
+            _isAttacking = true;
+            print("AI attack animation trigger");
+
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, _attackRange))
+            {
+                var hitHealth = hit.collider.gameObject.GetComponent<Health>();
+                if (hitHealth != null && hitHealth == _player) {
+                    hitHealth.TakeDamage(_attackPower);
+                }
+            }
+        
+            yield return new WaitForSeconds(3f);
+            _isAttacking = false;
+        }
     }
 
     private void SwitchToIdle() {
@@ -88,9 +104,9 @@ public class CommonAI : MonoBehaviour {
             return;
         }
     }
-
+    
     private bool WithinAttackRange() {
-        return Vector3.Distance(transform.position, _player.transform.position) <= _attackRange;
+        return !_playerDead && Vector3.Distance(transform.position, _player.transform.position) <= _attackRange;
     }
 
     private Vector3? PlayerDirection {

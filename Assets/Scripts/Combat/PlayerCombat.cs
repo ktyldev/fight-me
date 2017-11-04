@@ -35,7 +35,7 @@ public class PlayerCombat : MonoBehaviour {
         }
 
         GetComponent<MouseLook>().LookAtMouse();
-        _animator.SetTrigger("punch");
+        _animator.SetTrigger(GameTags.anim_punch);
 
         StartCoroutine(ThrowPunch(minTimings[_chainIndex]));
         // Punch # _chainIndex + 1 of combo

@@ -25,12 +25,12 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         _health = GetComponent<Health>();
         _bac = GetComponent<BloodAlcohol>();
-        _health.OnDeath.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
+        _health.OnDeath.AddListener(() => StartCoroutine(Die()));
         _combat = GetComponent<PlayerCombat>();
         _charController = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
     }
-
+    
     private void Update() {
         if (Input.GetButtonDown(GameInput.Fire)) {
             _combat.Attack();
@@ -44,7 +44,9 @@ public class PlayerController : MonoBehaviour {
                 _fallTimer = 0;
             }
 
-            HandleInput();
+            if (!_fallenOver) {
+                HandleInput();
+            }
         } else {
             _fallTimer += Time.deltaTime;
         }
@@ -67,20 +69,28 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Move() {
-        _animator.SetBool("moving", _charController.velocity != Vector3.zero);
+        _animator.SetBool(GameTags.anim_moving, _charController.velocity != Vector3.zero);
         _movement.y += Physics.gravity.y * Time.deltaTime;
         _charController.Move(_movement * speed * Time.deltaTime);
     }
 
     private void FallOver() {
         _fallenOver = true;
-        _animator.SetTrigger("fall_over");
+        _animator.SetTrigger(GameTags.anim_fall_over);
         StartCoroutine(GetUp());
+    }
+
+    private IEnumerator Die() {
+        _fallenOver = true;
+        _animator.SetBool(GameTags.anim_moving, false);
+        _animator.SetTrigger(GameTags.anim_die);
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
 
     private IEnumerator GetUp() {
         yield return new WaitForSeconds(getUpTime);
-        _animator.SetTrigger("get_up");
+        _animator.SetTrigger(GameTags.anim_get_up);
         _fallenOver = false;
     }
 }
