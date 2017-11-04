@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     public float drunkMotion;
     public float fallAnimTime;
     public float getUpTime;
+    public Bounds movementBounds;
 
     private CharacterController _charController;
     private Health _health;
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour {
         _animator.SetBool(GameTags.anim_moving, _charController.velocity != Vector3.zero);
         _movement.y += Physics.gravity.y * Time.deltaTime;
         _charController.Move(_movement * speed * Time.deltaTime);
+        transform.position = movementBounds.ClosestPoint(transform.position);
     }
 
     private void FallOver() {
