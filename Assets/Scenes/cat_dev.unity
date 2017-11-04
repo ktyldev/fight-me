@@ -200,6 +200,16 @@ Prefab:
       propertyPath: delayDestroy
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114423627602283778, guid: e7c33ea4d8f3be540b75178d5a4da775,
+        type: 2}
+      propertyPath: fallAnimTime
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114423627602283778, guid: e7c33ea4d8f3be540b75178d5a4da775,
+        type: 2}
+      propertyPath: getUpTime
+      value: 1.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7c33ea4d8f3be540b75178d5a4da775, type: 2}
   m_IsPrefabParent: 0

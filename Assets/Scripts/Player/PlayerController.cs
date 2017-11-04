@@ -89,8 +89,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private IEnumerator GetUp() {
-        yield return new WaitForSeconds(getUpTime);
         _animator.SetTrigger(GameTags.anim_get_up);
+        yield return new WaitForSeconds(getUpTime);
         _fallenOver = false;
     }
 }
