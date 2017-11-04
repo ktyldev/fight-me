@@ -28,8 +28,10 @@ public class BloodAlcohol : MonoBehaviour {
 	}
     
     public void Drink(Drink drink) {
-        if (_current == maximum)
+        if (_current == maximum) {
+            GameObject.FindGameObjectWithTag(GameTags.Spawner).GetComponent<Spawner>().SpawnBoss();
             return;
+        }
         
         _current = Mathf.Clamp(_current + drink.bacIncrease, 0, maximum);
         StartCoroutine(DrinkDelay());
