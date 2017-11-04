@@ -11,6 +11,9 @@ public class CommonAI : MonoBehaviour {
     private int _attackPower;
 
     [SerializeField]
+    private float _attackTiming;
+
+    [SerializeField]
     private float _attackRange;
 
     [SerializeField]
@@ -61,7 +64,7 @@ public class CommonAI : MonoBehaviour {
                 }
             }
         
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(_attackTiming);
             _isAttacking = false;
         }
     }

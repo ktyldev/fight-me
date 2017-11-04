@@ -80,9 +80,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private IEnumerator Die() {
-        _fallenOver = true;
-        _animator.SetBool(GameTags.anim_moving, false);
         _animator.SetTrigger(GameTags.anim_die);
+        _animator.SetBool(GameTags.anim_moving, false);
+        _fallenOver = true;
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }

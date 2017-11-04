@@ -628,6 +628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackPower: 2
+  _attackTiming: 0.5
   _attackRange: 2
   _sightRange: 20
   _movementSpeed: 2
