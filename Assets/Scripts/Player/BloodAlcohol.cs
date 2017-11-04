@@ -41,6 +41,7 @@ public class BloodAlcohol : MonoBehaviour {
 
         IsDrinking = true;
         animator.SetTrigger("drink");
+        animator.SetBool("moving", false);
 
         yield return new WaitForSeconds(drinkTime);
 
