@@ -519,10 +519,10 @@ RectTransform:
   m_Father: {fileID: 1997933880}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -742.6, y: 0.000024796}
-  m_SizeDelta: {x: 417.1, y: 216.4}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 357, y: 0.000012398}
+  m_SizeDelta: {x: 671.8, y: 239.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &79274858
 MonoBehaviour:
@@ -10468,7 +10468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -101.39996, y: -0.000020981}
+  m_AnchoredPosition: {x: -229, y: -0.000020981}
   m_SizeDelta: {x: 160, y: 63.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1840814810
@@ -10505,7 +10505,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'WASD to Move
 
-    Left Click to Fight'
+    Left Click to Fight
+
+    B to Exit (But why would you?)'
 --- !u!222 &1840814811
 CanvasRenderer:
   m_ObjectHideFlags: 0

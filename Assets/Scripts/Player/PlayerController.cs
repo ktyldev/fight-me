@@ -57,6 +57,9 @@ public class PlayerController : MonoBehaviour {
             return;
 
         Move();
+
+        if (Input.GetKeyDown(KeyCode.B))
+            Application.Quit();
     }
 
     private void HandleInput() {
