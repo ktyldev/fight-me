@@ -13,13 +13,15 @@ public class BloodAlcohol : MonoBehaviour {
     public UnityEvent OnDrink { get; private set; }
     public bool IsDrinking { get; private set; }
 
+    private SfxManager _sfx;
+
     void Awake() {
         OnDrink = new UnityEvent();    
     }
 
     // Use this for initialization
     void Start () {
-		
+        _sfx = GameObject.FindGameObjectWithTag(GameTags.Music).GetComponent<SfxManager>();
 	}
 	
 	// Update is called once per frame
@@ -36,6 +38,7 @@ public class BloodAlcohol : MonoBehaviour {
         _current = Mathf.Clamp(_current + drink.bacIncrease, 0, maximum);
         StartCoroutine(DrinkDelay());
         OnDrink.Invoke();
+        _sfx.Drink();
     }
 
     private IEnumerator DrinkDelay() {

@@ -16,9 +16,11 @@ public class PlayerCombat : MonoBehaviour {
     private int _chainIndex;
     private float _lastAttackTime;
     private Animator _animator;
+    private SfxManager _sfx;
 
     void Start() {
-        _animator = GetComponentInChildren<Animator>();        
+        _animator = GetComponentInChildren<Animator>();
+        _sfx = GameObject.FindGameObjectWithTag(GameTags.Music).GetComponent<SfxManager>();
     }
 
     void Update () {
@@ -63,5 +65,6 @@ public class PlayerCombat : MonoBehaviour {
     private IEnumerator ThrowPunch(float delay) {
         yield return new WaitForSeconds(delay);
         DoDamage();
+        _sfx.Punch();
     }
 }

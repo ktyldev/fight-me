@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour {
     private PlayerCombat _combat;
     private Animator _animator;
     private Vector3 _movement = Vector3.zero;
+    private SfxManager _sfx;
     private float _fallTimer;
-
     private bool _fallenOver;
 
     void Start() {
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
         _combat = GetComponent<PlayerCombat>();
         _charController = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
-
+        _sfx = GameObject.FindGameObjectWithTag(GameTags.Music).GetComponent<SfxManager>();
         _health.OnDeath.AddListener(Die);
     }
     
@@ -69,11 +69,26 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    bool _moving;
     private void Move() {
         _animator.SetBool(GameTags.anim_moving, _charController.velocity != Vector3.zero);
         _movement.y += Physics.gravity.y * Time.deltaTime;
+        if (!_moving && _charController.velocity != Vector3.zero) {
+            _moving = true;
+            StartCoroutine(TakeSteps());
+        }
         _charController.Move(_movement * speed * Time.deltaTime);
         transform.position = movementBounds.ClosestPoint(transform.position);
+    }
+
+    
+    private IEnumerator TakeSteps() {
+        while (_charController.velocity != Vector3.zero) {
+            yield return new WaitForSeconds(0.47f);
+            _sfx.Step();
+        }
+
+        _moving = false;
     }
 
     private void FallOver() {

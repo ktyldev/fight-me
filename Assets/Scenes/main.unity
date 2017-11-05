@@ -7615,6 +7615,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1767591930}
   - component: {fileID: 1767591929}
+  - component: {fileID: 1767591931}
   m_Layer: 0
   m_Name: Music
   m_TagString: Music
@@ -7647,6 +7648,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1767591931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1767591928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a85c20529a841e448d492e3088e5525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  breaking: {fileID: 1812105951083960, guid: 0769bf10d8c84a94fbfcb5fce45b6ab6, type: 2}
+  drink: {fileID: 1152445427657240, guid: a7908905f1e25234f9b73983f72eb33c, type: 2}
+  punch: {fileID: 1879019222185490, guid: 3b1186ac8d5bb7847af086420b929509, type: 2}
+  steps:
+  - {fileID: 1461711923285014, guid: 9e8bd0cc250d89e4e9f01879d55da0a8, type: 2}
+  - {fileID: 1459361853512114, guid: 9517b99e55b20e84fa4808e50cf7e2b2, type: 2}
 --- !u!1 &1768381280
 GameObject:
   m_ObjectHideFlags: 0

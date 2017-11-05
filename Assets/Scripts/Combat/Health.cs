@@ -7,7 +7,9 @@ public class Health : MonoBehaviour {
 
     public int max;
     public float delayDestroy;
+
     private int _current;
+    private SfxManager _sfx;
     
     public float Current { get { return (float)_current / max; } }
     public UnityEvent OnChange { get; private set; }
@@ -20,6 +22,7 @@ public class Health : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        _sfx = GameObject.FindGameObjectWithTag(GameTags.Music).GetComponent<SfxManager>();
         _current = max;
     }
 
@@ -33,6 +36,7 @@ public class Health : MonoBehaviour {
         OnChange.Invoke();
         if (Current <= 0) {
             OnDeath.Invoke();
+            _sfx.Breaking();
             Destroy(gameObject, delayDestroy);
         }
     }
