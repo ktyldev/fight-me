@@ -26,10 +26,11 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         _health = GetComponent<Health>();
         _bac = GetComponent<BloodAlcohol>();
-        _health.OnDeath.AddListener(() => StartCoroutine(Die()));
         _combat = GetComponent<PlayerCombat>();
         _charController = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
+
+        _health.OnDeath.AddListener(Die);
     }
     
     private void Update() {
@@ -81,12 +82,11 @@ public class PlayerController : MonoBehaviour {
         StartCoroutine(GetUp());
     }
 
-    private IEnumerator Die() {
+    private void Die() {
         _animator.SetTrigger(GameTags.anim_die);
         _animator.SetBool(GameTags.anim_moving, false);
         _fallenOver = true;
-        yield return new WaitForSeconds(3);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+        GameOverScreen.GameOver(false);
     }
 
     private IEnumerator GetUp() {

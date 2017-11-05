@@ -23,6 +23,6 @@ public class Spawner : MonoBehaviour {
             return;
 
         _bossSpawned = true;
-        Instantiate(boss);
+        Instantiate(boss, transform);
     }
 }
